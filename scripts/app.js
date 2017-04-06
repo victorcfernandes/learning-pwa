@@ -24,7 +24,7 @@
     cardTemplate: document.querySelector('.cardTemplate'),
     container: document.querySelector('.main'),
     addDialog: document.querySelector('.dialog-container'),
-    daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    daysOfWeek: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom']
   };
 
 
@@ -165,8 +165,8 @@
    * freshest data.
    */
   app.getForecast = function(key, label) {
-    var statement = 'select * from weather.forecast where woeid=' + key;
-    var url = 'https://query.yahooapis.com/v1/public/yql?format=json&q=' +
+    var statement = 'select * from weather.forecast where woeid=' + key + ' and u="c"';
+    var url = 'https://query.yahooapis.com/v1/public/yql?format=json&u=c&q=' +
         statement;
     
     if ('caches' in window) {
@@ -293,19 +293,19 @@
    * discussion.
    */
   var initialWeatherForecast = {
-    key: '2459115',
-    label: 'New York, NY',
+    key: '26798699',
+    label: 'Rio de Janeiro, RJ',
     created: '2016-07-22T01:00:00Z',
     channel: {
       astronomy: {
-        sunrise: "5:43 am",
-        sunset: "8:21 pm"
+        sunrise: "6:30 am",
+        sunset: "5:48 pm"
       },
       item: {
         condition: {
           text: "Windy",
           date: "Thu, 21 Jul 2016 09:00 PM EDT",
-          temp: 56,
+          temp: 23,
           code: 24
         },
         forecast: [
@@ -319,11 +319,11 @@
         ]
       },
       atmosphere: {
-        humidity: 56
+        humidity: 66
       },
       wind: {
-        speed: 25,
-        direction: 195
+        speed: 18,
+        direction: 15
       }
     }
   };
