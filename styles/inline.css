@@ -242,6 +242,10 @@ body {
   padding: 8px !important;
   float: right; }
 
+.close-btn{
+  float: right;
+  cursor: pointer;
+}
 .card {
   padding: 16px;
   position: relative;

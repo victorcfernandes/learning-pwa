@@ -95,6 +95,7 @@
       card = app.cardTemplate.cloneNode(true);
       card.classList.remove('cardTemplate');
       card.querySelector('.location').textContent = data.label;
+      card.querySelector('.city-key').setAttribute('city-id', data.key);
       card.removeAttribute('hidden');
       app.container.appendChild(card);
       app.visibleCards[data.key] = card;
@@ -147,6 +148,12 @@
       app.container.removeAttribute('hidden');
       app.isLoading = false;
     }
+
+    card.querySelector('.js_close').addEventListener('click', function() {
+      var cityKey = this.parentNode.querySelector('.city-key').getAttribute('city-id');
+      app.deleteCity(cityKey);
+    });
+
   };
 
 
@@ -221,6 +228,20 @@
   app.saveSelectedCities = function() {
     var selectedCities = JSON.stringify(app.selectedCities);
     localStorage.selectedCities = selectedCities;
+  };
+
+  // delete city from storage and card
+  app.deleteCity = function(key){
+    var el = app.visibleCards[key];
+    el.parentNode.removeChild(el);
+    console.log(app);
+    var selectedCities = JSON.parse(localStorage.selectedCities);
+    for(var i=0; i < selectedCities.length; i++){
+      if(selectedCities[i].key == key){
+        selectedCities.splice(i, 1);
+      }
+    }
+    localStorage.selectedCities = JSON.stringify(selectedCities);
   };
 
   app.getIconClass = function(weatherCode) {
